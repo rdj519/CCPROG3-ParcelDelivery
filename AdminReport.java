@@ -1,3 +1,10 @@
+/** The class AdminReport acts as a database for parcels and their information.
+ *  This is only accessible by the admin only.
+ *  
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -6,26 +13,39 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.*;
 
-public class AdminReport extends JFrame{
 
+public class AdminReport extends JFrame
+{
+	/* Attributes */
 	
-	private JTextField textField; //tracker input
-	private JTextArea manilaContent;
-	private JTextArea luzonContent;
-	private JTextArea visayasContent;
-	private JTextArea mindanaoContent; 
-	private ArrayList<String> trackNums;
-	private ArrayList<String> receipts;
-	// this class acts as a database for parcels and their infos (accessible only by admin)
-	public AdminReport() {
+	private JTextField textField;				/* JTextField: Tracker Input */
+	private JTextArea manilaContent;			/* JTextArea: Display Metro Manila content */
+	private JTextArea luzonContent;				/* JTextArea: Display Luzon content */
+	private JTextArea visayasContent;			/* JTextArea: Display Visayas content */
+	private JTextArea mindanaoContent; 			/* JTextArea: Display Mindanao content */
+	private ArrayList<String> trackNums;		/* ArrayList: Holds String of tracking numbers */
+	private ArrayList<String> receipts;			/* ArrayList: Holds String of receipts */
+	
+	/* Constructor */
+	
+	/** This constructor initializes the ArrayList and the upcoming display of
+	 *  the report.
+	 * 
+	 */
+	
+	public AdminReport()
+	{
 		trackNums = new ArrayList<String>();
 		receipts = new ArrayList<String>();
 		initialize();
 	}
 	
-	/**
-	 * Initialize the contents of the frame.
+	/* Methods */
+	
+	/** This method initializes the report only seen by the admin.
+	 * 
 	 */
+	
 	private void initialize() 
 	{
 		setBounds(100, 100, 885, 400);
@@ -61,8 +81,6 @@ public class AdminReport extends JFrame{
 		getContentPane().add(lPanel);
 		lPanel.setLayout(new BoxLayout(lPanel, BoxLayout.X_AXIS));
 		
-
-		
 		JLabel lblProvincialWithinVisayas = new JLabel("Provincial within Visayas");
 		lblProvincialWithinVisayas.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
 		lblProvincialWithinVisayas.setBounds(447, 3, 175, 23);
@@ -72,7 +90,6 @@ public class AdminReport extends JFrame{
 		vPanel.setBounds(435, 30, 210, 250);
 		getContentPane().add(vPanel);
 		vPanel.setLayout(new BoxLayout(vPanel, BoxLayout.X_AXIS));
-		
 
 		JLabel lblProvincialWithinMindanao = new JLabel("Provincial within Mindanao");
 		lblProvincialWithinMindanao.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
@@ -83,9 +100,8 @@ public class AdminReport extends JFrame{
 		mPanel.setBounds(650, 30, 210, 250);
 		getContentPane().add(mPanel);
 		mPanel.setLayout(new BoxLayout(mPanel, BoxLayout.X_AXIS));
-		
 	
-		//scrolls and content
+		/* Note: Scrolls and content of Metro Manila to Mindanao */
 		JScrollPane mmScroll = new JScrollPane(manilaContent);
 		mmPanel.add(mmScroll);
 		
@@ -117,7 +133,7 @@ public class AdminReport extends JFrame{
 				dispose();
 			}
 		});
-		JButton btnSearch = new JButton("Search");
+		JButton btnSearch = new JButton("Search");				/* Note: Search tracking number */
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -151,9 +167,8 @@ public class AdminReport extends JFrame{
 		
 	}
 	
-	/** adminReport is an attribute in controller, which means that as parcels are created and delivered, their data is being updated 
-	 * in this report class, only then that they (admin) ask to view the status of all parcels, (after inputting passworkd), do we show them 
-	 * the report generation itself
+	/** This method makes the visibility of the screen.
+	 * 
 	 */
 	
     public void open()
@@ -161,6 +176,11 @@ public class AdminReport extends JFrame{
     	setVisible(true);
     }
 	
+    /** This method shows the price of the chosen parcel.
+     * 
+     *  @param s String variable to set the text
+     */
+    
 	private void showPriceWindow(String s) {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
@@ -195,30 +215,60 @@ public class AdminReport extends JFrame{
 		
 	}
 	
+	/** This method add tracker to Metro Manila
+	 * 
+	 * 	@param s String variable to be placed in text field
+	 */
+	
 	public void addMetroManilaContent(String s)
 	{
 		manilaContent.setText(s);
 	}
+	
+	/** This method add tracker to Luzon
+	 * 
+	 * 	@param s String variable to be placed in text field
+	 */
 	
 	public void addLuzonContent(String s)
 	{
 		luzonContent.setText(s);
 	}
 	
+	/** This method add tracker to Visayas
+	 * 
+	 * 	@param s String variable to be placed in text field
+	 */
+	
 	public void addVisayasContent(String s)
 	{
 		visayasContent.setText(s);
 	}
+	
+	/** This method add tracker to Mindanao
+	 * 
+	 * 	@param s String variable to be placed in text field
+	 */
 	
 	public void addMindanaoContent(String s)
 	{
 		mindanaoContent.setText(s);
 	}
 	
+	/** This method adds tracking number to ArrayList
+	 * 
+	 * 	@param t String variable to add the tracking number
+	 */
+	
 	public void addTrackNum(String t)
 	{
 		trackNums.add(t);
 	}
+	
+	/** This method adds a receipt to ArrayList
+	 * 
+	 * 	@param r String variable to add the receipt
+	 */
 	
 	public void addReceipt(String r)
 	{

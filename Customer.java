@@ -1,4 +1,3 @@
-import java.util.*;
 /** The class Customer represents a customer or user with name and
  *  the intended region of the parcel to be delivered.
  * 
@@ -6,11 +5,15 @@ import java.util.*;
  *  @version 1.00
  */
 
+import java.util.*;
+
+
 public class Customer
 {	
 	/* Constructor */
-	/** This constructor receives the name of the user and the
-	 *  region of the parcel that will be delivered to.
+	
+	/** This constructor receives the name of the user and
+	 *  initialize the ArrayList of Parcel objects.
 	 *  
 	 *  @param name a String name
 	 */
@@ -23,7 +26,7 @@ public class Customer
 	
 	/* Methods */
 	
-	/** Adds a parcel for customerMe
+	/** This method adds a parcel to the transaction.
 	 * 
 	 * @param n number of items
 	 * @param type String type of parcel
@@ -31,6 +34,7 @@ public class Customer
 	 * @param recipient String name of recipient
 	 * @return bValid boolean if operation of adding parcel is successful
 	 */
+	
 	public boolean addParcel(int n, String type, String region, String recipient)
 	{
 		boolean bValid = true;
@@ -43,11 +47,13 @@ public class Customer
 		return bValid;
 	}
 	
-	/** Adds a parcel for customer
+	/** This method adds a parcel to the transaction. Difference is that this is directly
+	 *  from a Parcel object.
 	 * 
-	 * @param p Parcel
+	 * @param p Parcel object to be added
 	 * @return bValid boolean if operation was a success
 	 */
+	
 	public boolean addParcel(Parcel p)
 	{
 		boolean bValid = false;
@@ -58,11 +64,14 @@ public class Customer
 		}
 		return bValid;
 	}
-	/** Removes a parcel at index i
+	
+	/** This method removes a Parcel object from an ArrayList of Parcel objects.
 	 * 
-	 * @param i index at which the parcel is to be removed
+	 *  @param i an integer variable on the index of Parcel objects
+	 *  @return boolean answer if the method runs successfully
 	 * 
 	 */
+	
 	public boolean removeParcel(int i)
 	{
 		boolean bValid = false;
@@ -76,8 +85,9 @@ public class Customer
 
 	/** This method returns a specific parcel from an index
 	 * 
-	 * @return a parcel in specific index
+	 *  @return a parcel in specific index
 	 */
+	
 	public Parcel getParcel(int n)
 	{
 		return parcels.get(n);
@@ -93,12 +103,18 @@ public class Customer
 		return strName;
 	}
 	
+	/** This method returns the ArrayList of Parcel objects.
+	 * 
+	 *  @return ArrayList of Parcel objects
+	 */
+	
 	public ArrayList <Parcel> getParcels()
 	{
 		return parcels;
 	}
-	/* Attributes */
-	private String strName;             //Name of the recipient
-	ArrayList <Parcel> parcels; //ArrayList of parcels
 	
+	/* Attributes */
+	
+	private String strName;             		  /* String: Name of customer */
+	protected ArrayList <Parcel> parcels;         /* ArrayList: ArrayList of Parcel objects */
 }

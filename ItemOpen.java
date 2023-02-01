@@ -1,3 +1,10 @@
+/** The class ItemOpen is responsible for the window display
+ *  for the user to input the item they want to add.
+ * 
+ * 	@author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.awt.EventQueue;
 
 
@@ -16,34 +23,37 @@ import java.awt.Font;
 import javax.swing.ButtonGroup;
 import java.awt.Color;
 
+
 public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 
-
+	/* Attributes */
+	
 	/* JTextFields */
-	private JTextField txtLength;
-	private JTextField txtWidth;
-	private JTextField txtPages;
-	private JTextField txtHeight;
-	private JTextField txtWeight;
-	private JTextField txtItemName;
-	private JRadioButton rdbtnDocument;
-	private JRadioButton rdbtnProduct;
-	private JRadioButton rdbtnIrregularProduct;
-	private ButtonGroup rdbtnGrp;
+	private JTextField txtLength;					/* Length textfield */
+	private JTextField txtWidth;					/* Width textfield */
+	private JTextField txtPages;					/* Pages textfield */
+	private JTextField txtHeight;					/* Height textfield */
+	private JTextField txtWeight;					/* Weight textfield */
+	private JTextField txtItemName;					/* Item Name textfield */
+	private JRadioButton rdbtnDocument;				/* Radio Button Document option */
+	private JRadioButton rdbtnProduct;				/* Radio Button Product option */
+	private JRadioButton rdbtnIrregularProduct;		/* Radio Button Irregular option */
+	private ButtonGroup rdbtnGrp;					/* Button Group */
 	
 	/* Panels */
-	private JPanel upperPanel;
-	private JPanel lowerPanel;
+	private JPanel upperPanel;						/* Upper panel */
+	private JPanel lowerPanel;						/* Lower panel */
 	
 	/* Labels */
-	private JLabel lblIrregular;
-	private JLabel lblPages;
-	private JLabel lblHeight;
-	private JLabel lblWeight;
-	private JLabel lblLength;
-	private JLabel lblWidth;
-	private JButton btnOk;
-	private boolean isInitialized;
+	private JLabel lblIrregular;					/* Irregular label */
+	private JLabel lblPages;						/* Pages label */
+	private JLabel lblHeight;						/* Height label */
+	private JLabel lblWeight;						/* Weight label */
+	private JLabel lblLength;						/* Length label */
+	private JLabel lblWidth;						/* Width label */
+	private JButton btnOk;							/* Button OK */
+	private boolean isInitialized;					/* boolean init */
+	
 	/* Item attributes */
 	private Item item;
 	private JLabel lblNoteWeightShould;
@@ -53,28 +63,38 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 	private ItemListener iIrregular;
 	private ActionListener aOk;
 	
+	/* Override method actionPerformed via ActionEvent */
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		
 	}
 
+	/* Override method itemStateChanged via ItemEvent */
+	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		
 	}
-	/**
-	 * Create the application.
+	
+	/* Constuctor */
+	
+	/** This constructor initializes the ItemOpen.
+	 * 
 	 */
-	//
+	
 	public ItemOpen() {
 		isInitialized = false;
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
+	/* Methods */
+	
+	/** This method initializes the content of the frame.
+	 * 
 	 */
+	
 	private void initialize() {
 		
 		getContentPane().setForeground(Color.WHITE);
@@ -153,19 +173,21 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 		
 		lblIrregular = new JLabel("Please input largest measures for length, width, height");
 		lblIrregular.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
-		lblIrregular.setBounds(32, 106, 288, 16);
+		lblIrregular.setBounds(22, 105, 288, 16);
 		lblIrregular.setVisible(false);
 		getContentPane().add(lblIrregular);
 	}
 	
+	/** This method updates the panels depending on the radio button clicked.
+	 * 
+	 */
 	
-	//updates the panels depending on the radio button pushed.
 	public void setContent(int type)
 	{
 			upperPanel.removeAll();
 			lowerPanel.removeAll();
 
-			if(type == 1)
+			if(type == 1) /* Document */
 			{
 				
 					upperPanel.add(lblLength);
@@ -176,7 +198,7 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 					upperPanel.add(txtPages);
 					lblIrregular.setVisible(false);
 			}
-			else if( type == 2)
+			else if( type == 2) /* Regular */
 			{
 				
 					upperPanel.add(lblLength);
@@ -190,7 +212,7 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 					lowerPanel.add(txtHeight);
 					lblIrregular.setVisible(false);
 			}
-			else if( type == 3)	
+			else if( type == 3)	/* Irregular */
 			{
 					upperPanel.add(lblLength);
 					upperPanel.add(lblLength);
@@ -208,7 +230,11 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 			lowerPanel.revalidate();
 			lowerPanel.repaint();
 	}
-
+	
+	/** This method performs actions when user clicks on the radio buttons.
+	 * 
+	 */
+	
 	public void perform()
 	{
 		
@@ -226,6 +252,10 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 		
 	}
 	
+	/** This method opens the window when user wants to add item.
+	 * 
+	 */
+	
 	public void open(JMController controller)
 	{
 		if(isInitialized == false)
@@ -238,6 +268,12 @@ public class ItemOpen extends JFrame implements ActionListener, ItemListener{
 		setVisible(true);
 		
 	}
+	
+	/** This method initializes listeners.
+	 * 
+	 *  @param controller JMController interpret data from user
+	 */
+	
 	public void initListeners(JMController controller)
 	{
 

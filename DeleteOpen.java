@@ -1,3 +1,10 @@
+/** The class DeleteOpen is responsible if the user wants to delete an item.
+ *  This window will pop if the user decides to delete an item from the list.
+ * 
+ * 	@author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,23 +18,33 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class DeleteOpen extends JFrame implements ActionListener{
 
-	private JTextField txtNum;
-	private JButton btnOk;
-	private ActionListener ac;
-	private boolean isInitialized;
-	/**
-	 * Create the application.
+public class DeleteOpen extends JFrame implements ActionListener{
+	
+	/* Attributes */
+	
+	private JTextField txtNum;			/* JTextField: Item Number input */
+	private JButton btnOk;				/* JButton: OK Button */
+	private ActionListener ac;			/* ActionListener: Action variable */
+	private boolean isInitialized;		/* boolean: detects when initialized */
+	
+	/* Constructor */
+	
+	/** This constructor is responsible for initializing DeleteOpen.
+	 * 
 	 */
+	
 	public DeleteOpen() {
 		isInitialized = false;
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
+	/* Methods */
+	
+	/** This method initializes the contents of the frame.
+	 * 
 	 */
+
 	private void initialize() {
 		setBounds(100, 100, 259, 123);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -48,11 +65,21 @@ public class DeleteOpen extends JFrame implements ActionListener{
 		
 	}
 	
+	/** This method acts when action is performed.
+	 * 
+	 */
+	
 	public void perform()
 	{
 		btnOk.addActionListener(ac);
 		getContentPane().add(btnOk);
 	}
+	
+	/** This method opens the window if user wants to delete.
+	 * 
+	 * 	@param controller JMController variable that is the controller of the program
+	 * 
+	 */
 	
 	public void open(JMController controller)
 	{
@@ -64,7 +91,14 @@ public class DeleteOpen extends JFrame implements ActionListener{
 		}
 		setVisible(true);
 	}
-
+	
+	/** This method is responsible of what action will be done when
+	 *  user inputs on the text field.
+	 * 
+	 * 	@param controller JMController variable that will interpret the data from the user
+	 * 
+	 */
+	
 	public void initActionListener(JMController controller)
 	{
 		ac = new ActionListener() {

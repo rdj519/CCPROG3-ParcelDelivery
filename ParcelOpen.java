@@ -1,3 +1,11 @@
+/** The class ParcelOpen is responsible for the display of the parcels available to the user
+ *  once the user is done adding items to the list. Also, the user can input the recipient of the
+ *  said parcel, and checks if he wants the parcel insured or not.
+ *  
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.awt.EventQueue;
  
  
@@ -9,8 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.*;
  
+
 public class ParcelOpen extends JFrame implements ActionListener{
  
+	/* Attributes */
+	
     private JPanel listPanel;
     private JTextField txtRecipientName;
      
@@ -39,8 +50,13 @@ public class ParcelOpen extends JFrame implements ActionListener{
     private JRadioButton rdbtnBoxXLarge;
     private ButtonGroup rdbtnGrpSize;
      
-    // this class acts as a utility for the user to customize the type of parcel that they want, size, insurance, as well as
-    // input the name of the recipient that they intend to send the parcel to.
+    /* Constructor */
+    
+    /** This constructor initializes ParcelOpen via controller.
+     * 
+     *  @param controller JMController responsible for the interpretation of data from the user
+     */
+
     public ParcelOpen(JMController controller) {
         int i;
         for(i=0; i < controller.getItems().size(); i++)
@@ -48,8 +64,11 @@ public class ParcelOpen extends JFrame implements ActionListener{
         initialize(controller);
     }
  
-    /**
-     * Initialize the contents of the frame.
+    /* Methods */
+    
+    /** This method initialize the contents of the frame.
+     * 
+     *  @param controller JMController coming from the constructor of ParcelOpen
      */
  
     private void initialize(JMController controller) {         
@@ -130,7 +149,7 @@ public class ParcelOpen extends JFrame implements ActionListener{
         getContentPane().add(listPanel);
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
      
-        //conditional in the loops here 
+        /* Conditional in the loops here */
          
         double dL = 0;
         double dW = 0;
@@ -233,7 +252,6 @@ public class ParcelOpen extends JFrame implements ActionListener{
         		}
         	} 
         }
-        
         rdbtnGrpSize = new ButtonGroup();
         rdbtnFlatSmall = new JRadioButton("FLAT - 9 x 14 x 1");     
         rdbtnFlatSmall.setBounds(179, 76, 179, 25);
@@ -316,7 +334,7 @@ public class ParcelOpen extends JFrame implements ActionListener{
                 bBXLarge= true;
          
         bNone = false; 
-        // rotation algorithm here
+        /* Rotation algorithm */
         if(!(dL <= 9 && dW <= 14 && dH <= 1))
             if(!(dW <= 9 && dL <= 14 && dH <= 1))
                 if(!(dL <= 9 && dH <= 14 && dW <= 1))
@@ -484,12 +502,17 @@ public class ParcelOpen extends JFrame implements ActionListener{
          
     }
     
-    //closes (exits) the program
+    /** This method closes the program
+     * 
+     */
+    
     public void close()
     {
     	 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
-     
+    
+    /* Override method of actionPerformed */
+    
     @Override
     public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub

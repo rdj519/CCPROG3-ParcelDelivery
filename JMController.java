@@ -1,3 +1,10 @@
+/** The class JMController is responsible for the manipulation of orders and
+ *  commands from the customer. Ideally, this is the brains of the program.
+ *  
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.util.*;
 
 import java.awt.event.ActionEvent;
@@ -11,12 +18,20 @@ import java.util.Timer;
 
 import javax.swing.JOptionPane;
 
+
 public class JMController extends TimerTask implements ActionListener 
 {
-
+	/* Attributes */
+	
 	private JMGUI gui;
 	private Customer customer;
-
+	
+	/*
+	 * to be used in inner program:
+	 * 
+	private itemOpen itemO;
+	private parcelOpen parcelO;
+	*/
 	private Parcel oneParcel; //placeholder parcel
 	private int itemCount; //counts the number of items currently placed
 	private int parcelCount; //counts the number of parcels currently placed
@@ -43,6 +58,15 @@ public class JMController extends TimerTask implements ActionListener
 	private DeleteOpen deleteWindow;
 	private AdminReport adReport;
 	
+	/* Constructor */
+	
+	/** This constructor receives the GUI and the information of the customer
+	 *  to initialize the controller.
+	 * 
+	 *  @param gui JMGUI variable
+	 *  @param customer Customer variable for the information of the customer
+	 */
+	
     public JMController(JMGUI gui, Customer customer) {
     	
     	dDate = LocalDate.now();
@@ -66,6 +90,15 @@ public class JMController extends TimerTask implements ActionListener
     	itemWindow = new ItemOpen();
     	
     }
+    
+    /* Methods */
+    
+    /** This method determines what the program will do
+     *  when the user performs an action.
+     *  
+     *  @param e ActionEvent variable that is coming from the action of customer
+     * 
+     */
     
     public void actionPerformed (ActionEvent e)
     {
@@ -138,37 +171,71 @@ public class JMController extends TimerTask implements ActionListener
     	
     }
     
+    /** This method returns the GUI.
+     * 
+     *  @return GUI
+     */
     
     public JMGUI getGui()
     {
     	return this.gui;
     }
     
+    /** This method returns the number of items.
+     * 
+     *  @return number of items
+     * 
+     */
+    
     public int getCount()
     {
     	return this.itemCount;
     }
+    
+    /** This method adds the number of items.
+     * 
+     */
     
     public void addItemCount()
     {
     	itemCount++;
     }
     
+    /** This method adds the number of parcels.
+     * 
+     */
+    
     public void addParcelCount()
     {
     	parcelCount++;
     }
+    
+    /** This method sets the parcel information.
+     * 
+     *  @param parcel Parcel object ready to be set
+     */
     
     public void setParcel(Parcel parcel)
     {
     	this.oneParcel = parcel;
     }
     
+    /** This method sets the receipt of the parcel.
+     * 
+     * 	@param s String variable of the receipt
+     */
     
     public void setOneReceipt(String s)
     {
     	this.oneReceipt = s;
     }
+    
+    /** This method finalizes the process by adding the parcel itself to the customer's
+     *  orders. Will also add the trackers because the moment the order is done, the tracking
+     *  starts from preparing up to delivered.
+     * 
+     * 	@param parcel Parcel object ready to be added
+     */
     
     //finalizes the process by adding the parcel itself to the customer's orders
     //also adds the trackers because the moment the order is done, the tracking starts (starting from preparing..etc)
@@ -181,17 +248,22 @@ public class JMController extends TimerTask implements ActionListener
     	gui.addStatusContent("Parcel "+ strSequence + ": " + trackers.get(parcelCount-1).toString() + "\n");
     }
     
-    /** sets the timer delay and interval to be used for trackers
-     *  
+    /** This method sets the timer delay and interval to be
+     *  essentially used for the trackers.
+     * 
      */
+    
     public void setTimer(int nDelay, int nInterval)
     {
     	this.nDelay = nDelay;
     	this.nInterval = nInterval;
     }
-    /* displays the status of the parcel thru track num
+    
+    /* This method displays the status of the parcel through trackin number.
      * 
+     * @param track String variable inputted by the customer to track the parcel
      */
+    
     public void displayStatus(String track)
     {
     	int i;
@@ -201,25 +273,56 @@ public class JMController extends TimerTask implements ActionListener
     				gui.displayStatus(trackers.get(i).getStatus());
     	}
     }
+    
+    /** This method is responsible for the removal of parcels
+     *  if the customer wishes to remove a parcel from the
+     *  transaction.
+     *  
+     *  @param i an integer variable of the index of the ArrayList of parcels
+     * 
+     */
+    
     public void removeParcel(int i)
     {
     	this.customer.removeParcel(i);
     }
+    
+    /** This method returs ArrayList of Item objects.
+     * 
+     *  @return ArrayList of Item objects
+     */
     
     public ArrayList<Item> getItems()
     {
     	return items;
     }
    
-    //get item at index i
+    /** This method returns the chosen Item objects from the ArrayList of Item objects.
+     * 
+     *  @param i an integer variable of the index from the ArrayList
+     *  @return Item object
+     */
+    
     public Item getItem(int i)
     {
     	return items.get(i);
     }
+    
+    /** This method adds an Item object to the ArrayList of Item objects.
+     * 
+     *  @param item an Item object ready to be added to the ArrayList of Item objects
+     */
+    
     public void addItem(Item item)
     {
     	items.add(item);
     }
+    
+    /** This method deletes an Item object from the list.
+     * 
+     * 	@param n an integer variable that will act as an index
+     * 	@return boolean variable if it is successful or not
+     */
     
     public boolean deleteItem(int n)
     {
@@ -235,6 +338,12 @@ public class JMController extends TimerTask implements ActionListener
     		}  	
     	return bDeleted;
     }
+    
+    /** This method updates the Item list from the left side of the display.
+     * 
+     * 	@param isReset a boolean variable to reset the text area
+     * 
+     */
     
     public void updateItemContent(boolean isReset)
     {
@@ -264,35 +373,64 @@ public class JMController extends TimerTask implements ActionListener
     	}
     }
     
+    /** This method returns the passkey inputted by the admin.
+     * 
+     *  @return passkey
+     */
+    
     public String getPassKey()
     {
     	return this.strPass;
     }
     
+    /** This method makes sure the button click will make it true;
+     * 
+     */
+    
     public void okClicked()
     {
     	bOkClicked = true;
     }
+    
+    /** This method will exit the program.
+     * 
+     */
+    
     public void exitProgram()
     {
-    	gui.dispatchEvent(new WindowEvent(gui, WindowEvent.WINDOW_CLOSING)); //exits the program
+    	gui.dispatchEvent(new WindowEvent(gui, WindowEvent.WINDOW_CLOSING));
     }
-
+    
+    /** This method will return the date of the simulation.
+     * 
+     * 	@return date of simulation
+     */
+    
     public LocalDate getDate ()
     {
         return dDate;
     }
     
+    /** This method returns the Admin Report if the admin wishes to see the report.
+     * 
+     * 	@return variable of AdminReport
+     */
+    
     public AdminReport getAdminReport()
     {
     	return adReport;
     }
+    
+    /** This method overrides the run method.
+     * 
+     */
+    
 	@Override
 	public void run() 
 	{
 		dDate = dDate.plusDays(1);
 		gui.setDate(dDate.toString());
-		// admin report update
+		/* Admin report update */
 		int i;
 		String s, sMan, sL, sV, sMin;
 		if(parcelCount > 0)

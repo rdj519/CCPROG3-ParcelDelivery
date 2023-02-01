@@ -1,7 +1,10 @@
-/**
-
- * 
+/** The class JMGUI is responsible of the status and order of the Parcel
+ *  to the customer.
+ *  
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
  */
+
 import javax.swing.*;
 
 import java.util.*;
@@ -11,7 +14,8 @@ import java.awt.event.*;
 import java.time.format.DateTimeFormatter;
 public class JMGUI extends JFrame implements ActionListener
 {
-
+	/* Attributes */
+	
 	private JTextField txtTrackingNum;
 	
 	private JButton btnConfirm;
@@ -35,6 +39,14 @@ public class JMGUI extends JFrame implements ActionListener
 	private JTextArea txtStatus;
 	private JTextArea txtReceipt;
 	
+	/* Constructor */
+	
+	/** This constructor gets the name of the customer
+	 *  and will initialize the GUI.
+	 * 
+	 *  @param strName String variable of the name of the customer
+	 */
+	
 	public JMGUI(String strName) {
 		
 		super("Customer Name: " + strName );
@@ -50,6 +62,12 @@ public class JMGUI extends JFrame implements ActionListener
 		getContentPane().setLayout(null);
 		setVisible(true);
 	}
+	
+	/* Methods */
+	
+	/** This method initializes the contents of the frame.
+	 * 
+	 */
 	
     public void initGui ()
     {		
@@ -199,10 +217,21 @@ public class JMGUI extends JFrame implements ActionListener
 		
     }
     
+    /** This method sets the date of the simulation.
+     * 
+     *  @param date String variable of the date
+     */
+    
     public void setDate(String date)
     {
     	lblDate.setText(date);
     }
+    
+    /** This method adds Listeners in order for the program to react
+     *  to the actions of the customer.
+     * 
+     * 	@param listener ActionLister variables for the user to see the reaction of the program
+     */
     
     public void addListeners (ActionListener listener)
     {
@@ -216,6 +245,12 @@ public class JMGUI extends JFrame implements ActionListener
     	btnReport.addActionListener(listener);
     }
     
+    /** This method adds the content of the information of the item of the left
+     *  side of the display.
+     * 
+     * 	@param itemContent a String variable to be placed in the left side of the display
+     */
+    
     public void addItemContent(String itemContent)
     {
     	String currText = txtItems.getText() + itemContent;
@@ -226,6 +261,10 @@ public class JMGUI extends JFrame implements ActionListener
     	itemsPanel.repaint();
     }
     
+    /** This method resets the content of the left side of the display.
+     * 
+     */
+    
     public void resetItemContent()
     {
     	txtItems.setText("");
@@ -235,10 +274,21 @@ public class JMGUI extends JFrame implements ActionListener
     	itemsPanel.repaint();
     }
     
+    /** This method resets the price breakdown and content that can be found in the middle
+     *  of the display.
+     * 
+     */
+    
     public void resetPriceContent()
     {
     	setReceipt("");
     }
+    
+    /** This method adds the list of parcel objects and their tracking information.
+     * 
+     * @param parcelContent a String variable to be added to the top of the display
+     * 
+     */
     
     public void addParcelContent(String parcelContent)
     {
@@ -246,10 +296,20 @@ public class JMGUI extends JFrame implements ActionListener
     	txtStatus.setText(currText + "\n" + parcelContent);
     }
     
+    /** This method sets the receipt of the breakdown and total computation of the parcel.
+     * 
+     *  @param receiptContent a String variable to be set
+     */
+    
     public void setReceipt(String receiptContent)
     {
     	txtReceipt.setText(receiptContent);
     }
+    
+    /** This method displays the breakdown and total computation of the parcel.
+     * 
+     * 	@param statusContent a String variable to be displayed in the middle of the display
+     */
     
     public void displayStatus(String statusContent)
     {
@@ -257,6 +317,10 @@ public class JMGUI extends JFrame implements ActionListener
     	lblStatus.validate();
     	lblStatus.repaint();
     }
+    
+    /** This method terminates the Java virtual machine.
+     * 
+     */
     
     public void exit()
     {
@@ -272,6 +336,11 @@ public class JMGUI extends JFrame implements ActionListener
     	statusPanel.validate();
     	statusPanel.repaint();
     }
+    
+    /** This method returns the tracking number of the parcel.
+     * 
+     * 	@return tracking number of the parcel
+     */
     
     public String getTrack()
     {

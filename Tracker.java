@@ -1,13 +1,14 @@
+/** This class is responsible for the tracking of the parcel object.
+ * 
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
+
 import java.util.TimerTask;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
  
-/** This class is responsible for the tracking of the parcel object.
- * 
- * @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
- * @version 1.00
- */
- 
+
 public class Tracker extends TimerTask
 {
     /* Constructor */
@@ -22,7 +23,9 @@ public class Tracker extends TimerTask
      
     public Tracker (Parcel parcel, int nIndex, int nSeq, LocalDate date)
     {
-        initializeDelivery(nIndex);
+        dtfFormat = DateTimeFormatter.ofPattern("MMdd");
+        nTriggerTime = 0;
+    	initializeDelivery(nIndex);
         initializeDates(nDeliveryDays, date);
         initializePackage(parcel);
         this.pParcel = parcel;
@@ -97,7 +100,12 @@ public class Tracker extends TimerTask
     {
         return d.format(dtfFormat);
     }
-     
+    
+    /** This method returns the tracking number of the tracker of the parcel.
+     * 
+     *  @return the tracking number of the parcel
+     */
+    
     public String toString ()
     {
         strStatement = strPackageType + strStartingDay + strDestCode + Integer.toString(pParcel.getCurrItems()) + strSequence;
@@ -148,16 +156,16 @@ public class Tracker extends TimerTask
     
     /* Attributes */
      
-    private DateTimeFormatter dtfFormat = DateTimeFormatter.ofPattern("MMdd");
-    private int nDeliveryDays;
-    private int nTriggerTime = 0;
-    private LocalDate ldCurrentDay;
-    private LocalDate ldExpectedDay;
-    private LocalDate ldStartingDay;
-    private Parcel pParcel;
-    private String strDestCode;
-    private String strPackageType;
-    private String strSequence;
-    private String strStartingDay;
-    private String strStatement;
+    private DateTimeFormatter dtfFormat;    									   /* DateTimeFormatter: Formats the date to numerical month and day */
+    private int nDeliveryDays;													   /* int: Determines the number of days of the delivery time */
+    private int nTriggerTime;	  											       /* int: To determine the tracking of the tracker */
+    private LocalDate ldCurrentDay;												   /* LocalDate: Determine the current day of the tracker while it's being delivered */
+    private LocalDate ldExpectedDay;											   /* LocalDate: Determine the expected day of arrival of the parcel */
+    private LocalDate ldStartingDay;											   /* LocalDate: Determine the starting day of the parcel */
+    private Parcel pParcel;														   /* Parcel: Holds the Parcel object of the tracker */
+    private String strDestCode;													   /* String: Holds the destination code for the tracker name */
+    private String strPackageType;												   /* String: Holds the package type for the tracker name */
+    private String strSequence;													   /* String: Holds the sequence number for the tracker name */
+    private String strStartingDay;												   /* String: Holds the starting day for the tracker name */
+    private String strStatement;												   /* String: The tracker name of the tracker for the parcel */
 }

@@ -1,5 +1,12 @@
-import java.awt.EventQueue;
+/** The class AdminOpen acts as a gateway or portal to different admin
+ *  features of the program. 
+ *  
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
+ */
 
+
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,33 +19,40 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 
-/** this class acts as 
- * 
- * gateway/portal to different admin features of the program
- *
- */
-public class AdminOpen extends JFrame implements ActionListener{
 
-	private JPasswordField txtPass; 
-	private JButton btnOkReport;
-	private JButton btnOkExit;
-	/**
-	 * Create the application.
+public class AdminOpen extends JFrame implements ActionListener
+{
+	/* Attributes */
+	
+	private JPasswordField txtPass;			/* JPasswordField: Admin password textbox */ 
+	private JButton btnOkReport;			/* JButton: OK button */
+	private JButton btnOkExit;				/* JButton: Exit button */
+	
+	/* Constructor */
+	
+	/** This constructor creates the application.
+	 *
 	 */
-	public AdminOpen() {
+	
+	public AdminOpen()
+	{
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
+	
+	/* Methods */
+	
+	/** This method initialize the contents of the frame.
+	 *
 	 */
-	private void initialize() {
+	
+	private void initialize()
+	{
 		setBounds(100, 100, 292, 125);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
-		JLabel lblEnterAdminPassword = new JLabel("Enter Admin Password");
-		lblEnterAdminPassword.setFont(new Font("Trebuchet MS", Font.PLAIN, 13));
+		JLabel lblEnterAdminPassword = new JLabel("Enter Admin Password");			/* Note: Local variable to label - Enter Admin Password */
+		lblEnterAdminPassword.setFont(new Font("Trebuchet MS", Font.PLAIN, 13));	
 		lblEnterAdminPassword.setBounds(12, 13, 186, 29);
 		getContentPane().add(lblEnterAdminPassword);
 		
@@ -47,32 +61,36 @@ public class AdminOpen extends JFrame implements ActionListener{
 		getContentPane().add(txtPass);
 		txtPass.setColumns(15);
 			
-		// adds a window listener so that when 'x' is clicked, it resets password text
+		/* Note: Adds a window listener - when x is clicked, it will reset password text */
 		addWindowListener(new java.awt.event.WindowAdapter(){
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				txtPass.setText("");
 			  }
-
 		});
 	}
 	
+	/** This method performs when different actions are made. It highly
+	 *  depends on whether the admin wants to go to report or exit program.
+	 * 
+	 *  @param controller JMController 
+	 *  @param s String variable on different options
+	 */
+	
 	public void perform(JMController controller, String s)
 	{
-		
-		if(s.equals("report"))
+		if(s.equals("report")) /* When admin wants to see the report generation */
 		{
 		btnOkReport = new JButton("Ok");
 		btnOkReport.setFont(new Font("Trebuchet MS", Font.PLAIN, 13));
 		btnOkReport.setBounds(170, 42, 97, 25);	
 		btnOkReport.addActionListener(new ActionListener() 
 		{
-		
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					try {
-						/* checks if the password is valid */
+						/* Note: Checks if the password matches */
 						boolean bPassMatch = true;
 						int i;
 						char[] pass = new char[controller.getPassKey().length()];
@@ -106,7 +124,7 @@ public class AdminOpen extends JFrame implements ActionListener{
 			});
 		getContentPane().add(btnOkReport); 
 		}
-		else if(s.equalsIgnoreCase("exit"))
+		else if(s.equalsIgnoreCase("exit")) /* Note: If user wants to exit program but requires admin supervision */
 		{
 			btnOkExit = new JButton("Ok");
 			btnOkExit.setFont(new Font("Trebuchet MS", Font.PLAIN, 13));
@@ -118,7 +136,7 @@ public class AdminOpen extends JFrame implements ActionListener{
 					public void actionPerformed(ActionEvent e)
 					{
 						try {
-							/* checks if the password is valid */
+							/* Note: Check if password is valid */
 							boolean bPassMatch = true;
 							int i;
 							char[] pass = new char[controller.getPassKey().length()]; 
@@ -128,7 +146,7 @@ public class AdminOpen extends JFrame implements ActionListener{
 									bPassMatch = false;
 							if(bPassMatch)
 								{
-								JOptionPane.showMessageDialog(null, "Successfully excited the program.");
+								JOptionPane.showMessageDialog(null, "Successfully exited the program.");
 								controller.getGui().exit();
 								}
 							else
@@ -150,6 +168,10 @@ public class AdminOpen extends JFrame implements ActionListener{
 		}
 	}
 	
+	/** This method is for allowing the user/admin to do actions and let a new window display
+	 * 
+	 */
+	
 	public void open(JMController controller, String s)
 	{
 		
@@ -157,7 +179,10 @@ public class AdminOpen extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
-
+	/** This method is solely purposed for the ActionEvent.
+	 *  
+	 *  @param e ActionEvent in order for the program to react to actions
+	 */
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 

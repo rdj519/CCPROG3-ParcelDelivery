@@ -1,82 +1,86 @@
-/**
- * The abstract class Item represents a simple Item object.
+/** The abstract class Item is a superclass. This will be used for other classes
+ *  such as Document and the like.
  *
- *
- * @author Rey Delima, Nilo Jatico
- * @version 1.00 2019/6/30
+ *  @author Reynaldo K. Delima and Nilo Cantil K. Jatico II S11A
+ *  @version 1.00
  */
-abstract class Item
+
+public abstract class Item
 {
-	/**This constructor initalizes the attributes of the Item object. 
+	/* Constructor */
+	
+	/** This constructor receives the name of the item and the length and width
+	 *  of the item.
 	 * 
-	 *@param name a String that represets the name of the item
-	 *@param length a double value that represents the length of the item
-	 *@param width a double value that represents the width of the item
+	 *  @param name a String that represets the name of the item
+	 *  @param length a double value that represents the length of the item
+	 *  @param width a double value that represents the width of the item
 	 */
 	
-	/* the user enters the item:
-	 * What type of item do you want to put?
-	 * 1. Simple item
-	 * 2. Document
-	 * 3. Product 
-	 * What is the name of the item?
-	 * enter: */
-	public Item(String name, double length, double width) 
+	public Item (String name, double length, double width) 
 	{
 		this.strName = name;
 		this.dLength = length;
 		this.dWidth = width;
 	}
 	
-    /**This function gets the length of the Item
+	/* Methods */
+	
+    /** This method returns the length of the item.
      * 
-     * @return the length of the Item
+     *  @return the length of the Item
      */
-	public double getLength()
+	
+	public double getLength ()
 	{
 		return this.dLength;
 	}
 	
-    /**This function gets the width of the Item
+    /** This method returns the width of the item.
      * 
-     * @return the width of the Item
+     *  @return the width of the Item
      */
-	public double getWidth()
+	
+	public double getWidth ()
 	{
 		return this.dWidth;
 	}
 	
-	/**This function returns the String name
+	/** This method returns the name of the item.
 	 * 
-	 * @return the String representing the name
+	 *  @return the name of the Item
 	 */
-	public String getName()
+	
+	public String getName ()
 	{
 		return this.strName;
 	}
-    /**This function gets weight of the Item
+	
+    /** This method returns the weight of the item.
      * 
-     * @return the weight of the Item
+     *  @return the weight of the Item
      */
-	public double getWeight()
+	
+	public double getWeight ()
 	{
 		return this.dWeight;
 	}
 	
-    /**This function gets the height of the Item
+    /** This method returns the height of the item.
      * 
-     * @return the height of the Item
+     *  @return the height of the Item
      */
-	public double getHeight()
+	
+	public double getHeight ()
 	{
 		return this.dHeight;
 	}
 	
-	/* attributes */
-	protected String strName;
-	protected double dLength;
-	protected double dWidth;
-	protected double dHeight;
-	protected double dWeight;
-
+	/* Attributes */
+	
+	protected String strName;         /* String variable: name of the item */
+	protected double dLength;         /* double variable: length of the item */
+	protected double dWidth;          /* double variable: width of the item */
+	protected double dHeight;         /* double variable: height of the item */
+	protected double dWeight;         /* double variable: weight of the item */
 }
